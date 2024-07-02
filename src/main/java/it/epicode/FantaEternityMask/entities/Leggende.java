@@ -10,7 +10,7 @@ import lombok.Data;
 public class Leggende {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue //(strategy = GenerationType.IDENTITY)
     @NotNull
     private Long id;
 

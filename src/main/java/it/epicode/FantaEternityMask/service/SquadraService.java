@@ -7,7 +7,10 @@ import it.epicode.FantaEternityMask.repository.SquadraRepository;
 import it.epicode.FantaEternityMask.repository.UtenteRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,7 +24,7 @@ public class SquadraService {
     private UtenteRepository utenteRepository;
 
     @Autowired
-    private SquadraRepository squadraRepository;
+    private static SquadraRepository squadraRepository;
 
     public List<SquadraDTO> findAllSquadre() {
         List<Squadra> squadre = squadraRepository.findAll();
@@ -30,7 +33,13 @@ public class SquadraService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<SquadraDTO> findSquadraById(ResponseEntity<SquadraDTO> squadraById) {
+    public Page<Squadra> getAllSquadre (int page, int size, String sortBy){
+        Pageable pageable = PageRequest.of(page,size, Sort.by(sortBy));
+        return squadraRepository.findAll(pageable);
+
+    }
+
+    public Optional<SquadraDTO> findSquadraById(Long squadraById) {
         int Id = 0;
         Optional<Squadra> squadraOptional = squadraRepository.findById ((long) Id);
         return squadraOptional.map(this::convertToDTO);

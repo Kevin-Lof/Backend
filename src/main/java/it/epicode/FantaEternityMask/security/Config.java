@@ -44,17 +44,13 @@ public class Config {
         httpSecurity.cors(Customizer.withDefaults());
 
         //permette l'accesso a tutti dei servizi con endpoint /api/users e metodi get (naturalmente dopo l'autenticazione)
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/api/**").permitAll());
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers( "/auth/**").permitAll());
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers( "/anagrafe/**").permitAll());
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/indirizzo/**").permitAll());
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/clienti/**").permitAll());
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/utenti/**").permitAll());
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/fatture/**").permitAll());
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/indirizzi/**").permitAll());
+        //httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/api/**").permitAll());
+       // httpSecurity.authorizeHttpRequests(http -> http.requestMatchers( "/auth/**").permitAll());
+        //httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/utenti/**").permitAll());
+
 
         //nega l'accesso a qualsiasi servizio che non sia get e path /api/users
-        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/**").denyAll());
+        httpSecurity.authorizeHttpRequests(http -> http.requestMatchers("/**").permitAll());
 
         return httpSecurity.build();
     }

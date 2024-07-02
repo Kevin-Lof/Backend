@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface LeggendeRepository extends JpaRepository<Leggende, Long> {
-    @Query("SELECT l FROM Leggende l WHERE l.ruolo = :ruolo")
-    List<Leggende> findByRuolo(RuoloLeggende ruolo);
+   // @Query("SELECT l FROM Leggende l WHERE l.ruolo = :ruolo")
+   // List<Leggende> findByRuolo(RuoloLeggende ruolo);
 }

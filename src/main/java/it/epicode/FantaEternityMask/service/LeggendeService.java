@@ -4,11 +4,13 @@ import it.epicode.FantaEternityMask.dto.LeggendeDTO;
 import it.epicode.FantaEternityMask.entities.Leggende;
 import it.epicode.FantaEternityMask.repository.LeggendeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class LeggendeService {
@@ -16,8 +18,14 @@ public class LeggendeService {
     @Autowired
     private LeggendeRepository leggendeRepository;
 
-    public List<LeggendeDTO> getAllLeggende() {
-        return leggendeRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+    //public List<LeggendeDTO> getAllLeggende() {
+    //    return leggendeRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+    //}
+
+    public Page<Leggende> getAllLeggende (int page, int size, String sortBy){
+        Pageable pageable = PageRequest.of(page,size, Sort.by(sortBy));
+        return leggendeRepository.findAll(pageable);
+
     }
 
     public Optional<LeggendeDTO> getLeggendeById(Long id) {
